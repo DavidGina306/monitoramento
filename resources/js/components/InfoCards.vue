@@ -1,5 +1,5 @@
 <template>
-    <div class="card-box p-1 bg-citze mt-1 rounded">
+    <div class="card-box p-1 bg-info mt-1 rounded">
         <div class="inner">
             <h4> {{item.cliente}} </h4>
             <p> {{item.numped}}</p>
@@ -76,7 +76,4 @@
         background: rgba(0, 0, 0, 0.3);
     }
 
-    .bg-citze {
-        background-color: #9bb1be !important;
-    }
 </style>
