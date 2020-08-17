@@ -12,7 +12,7 @@ class RetornaPedidosService
         try {
             $data = [
                 'separacao' => DB::select('select * from CAACOM.separacao where codfilial in ('.$request->loja.')'),
-                'expedicao' =>  DB::select('select * from CAACOM.expedicao  where codfilial in ( '.$request->loja.')  order by tempo desc')
+                'expedicao' =>  DB::select('select * from CAACOM.disponivel  where codfilial in ( '.$request->loja.')')
             ];
             return [
                 'status' => true,

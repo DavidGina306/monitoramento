@@ -14,9 +14,9 @@
                         <template v-slot:button-content>
                             <em sty>LOJA</em>
                         </template>
-                        <b-dropdown-item href="/loja/1">Loja 1</b-dropdown-item>
-                        <b-dropdown-item href="/loja/2">Loja 2</b-dropdown-item>
-                        <b-dropdown-item href="/loja/3">Loja 3</b-dropdown-item>
+                        <b-dropdown-item href="?loja=1">Loja 1</b-dropdown-item>
+                        <b-dropdown-item href="?loja=2">Loja 2</b-dropdown-item>
+                        <b-dropdown-item href="?loja=3">Loja 3</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>

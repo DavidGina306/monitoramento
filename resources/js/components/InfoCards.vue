@@ -1,14 +1,16 @@
 <template>
     <div class="card-box p-1 bg-info mt-1 rounded">
         <div class="inner">
-            <h4> {{item.cliente}} </h4>
+            <h5> {{item.cliente | nomeCliente}} </h5>
             <p> {{item.numped}}</p>
         </div>
         <div class="icon">
             <i class="fas fa-people-carry"/>
         </div>
-        <div v-if="card.time" class="card-box-footer  d-inline p-1 rounded">
-            <i class="far fa-clock"/> {{ card.time | time}} min
+        <div  class="card-box-footer  d-inline p-1 rounded">
+            <span :class="item.cliente | classItem">
+                <i class="far fa-clock"/> {{ item.cliente | time}} min
+            </span>
         </div>
     </div>
 </template>
@@ -21,18 +23,20 @@
                 required: false
             }
         },
-        data() {
-            return {
-                card: this.item
-            }
-        },
-        mounted() {
-            this.card.time = moment();
-        },
         filters: {
-            time(startTime) {
-                let duration = moment.duration(moment(new Date()).diff(startTime));
-                return parseFloat(duration.asMinutes()).toFixed(0);
+            classItem(nome){
+                let time = nome.split(':');
+                time = time.pop().trim();
+                return parseInt(time) && +time >= 10 ? 'badge badge-danger' : 'badge badge-default';
+            },
+            nomeCliente(nome){
+                let novoNome = nome.split('-');
+                novoNome.pop();
+                return novoNome.join('-');
+            },
+             time(nome){
+                let time = nome.split(':');
+                return time.pop().trim();
             }
         }
     }
@@ -77,12 +81,13 @@
         color: rgba(0, 0, 0, 0.17);
     }
 
+    .badge-default{
+        color: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(0, 0, 0, 0.1);
+    }
     .card-box .card-box-footer {
-
         text-align: center;
         padding: 3px 0;
-        color: rgba(255, 255, 255, 0.8);
-        background: rgba(0, 0, 0, 0.1);
         width: 100%;
         text-decoration: none;
     }

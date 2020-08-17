@@ -18748,16 +18748,16 @@ input[type=color].form-control:disabled {
 /*N-PROGRESS*/
 
 #nprogress .bar {
-  background: #007bff;
+  background: #17a2b8;
   height: 5px;
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px #007bff, 0 0 5px #007bff;
+  box-shadow: 0 0 10px #17a2b8, 0 0 5px #17a2b8;
 }
 
 #nprogress .spinner-icon {
-  border-top-color: #007bff;
-  border-left-color: #007bff;
+  border-top-color: #17a2b8;
+  border-left-color: #17a2b8;
 }
 
