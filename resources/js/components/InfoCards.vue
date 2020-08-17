@@ -7,17 +7,32 @@
         <div class="icon">
             <i class="fas fa-people-carry"/>
         </div>
-        <div class="card-box-footer  d-inline p-1 rounded">
-            <i class="far fa-clock"/> 00:00:00
+        <div v-if="card.time" class="card-box-footer  d-inline p-1 rounded">
+            <i class="far fa-clock"/> {{ card.time | time}} min
         </div>
     </div>
 </template>
 <script>
+    const moment = require('moment');
     export default {
         props: {
             item: {
                 type: Object,
                 required: false
+            }
+        },
+        data() {
+            return {
+                card: this.item
+            }
+        },
+        mounted() {
+            this.card.time = moment();
+        },
+        filters: {
+            time(startTime) {
+                let duration = moment.duration(moment(new Date()).diff(startTime));
+                return parseFloat(duration.asMinutes()).toFixed(0);
             }
         }
     }
@@ -70,10 +85,6 @@
         background: rgba(0, 0, 0, 0.1);
         width: 100%;
         text-decoration: none;
-    }
-
-    .card-box:hover .card-box-footer {
-        background: rgba(0, 0, 0, 0.3);
     }
 
 </style>

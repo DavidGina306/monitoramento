@@ -7,18 +7,21 @@
                     <div class="bg-info rounded  p-2 text-white text-center font-weight-bold">
                         SEPARANDO ({{pedSeparacao.length}})
                     </div>
-                    <div v-if="pedSeparacao.length > 0" class="table-responsive vh-75 overflow-hidden">
-                        <table class="table rounded-0 overflow-auto">
+                    <div v-if="pedSeparacao.length > 0" class="table-responsive  mt-1 vh-75 overflow-hidden">
+                        <table class="table   overflow-auto">
                             <thead>
-                            <tr>
-                                <th class="border-0">NRO. PEDIDO</th>
-                                <th class="border-0">CLIENTE</th>
+                            <tr class="text-black-50">
+                                <th class="border-0"># NRO. PEDIDO</th>
+                                <th class="border-0"><i class="fa fa-user"/> CLIENTE</th>
+                                <th class="border-0" style="width: 120px"><i class="far fa-clock"/> TEMPO</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="item in  pedSeparacao" :key="item.numped">
+                            <tr v-for="item in  pedSeparacao.slice(0,8)" :key="item.numped">
                                 <td> {{item.numped}}</td>
                                 <td>{{item.cliente}}</td>
+                                <td class="text-center"><span v-if="item.time" class="badge badge-info">{{item.time | time}} min</span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -42,57 +45,45 @@
     import InfoCards from './InfoCards.vue'
     import NavBar from './NavBar.vue'
 
+    const moment = require('moment');
+
     export default {
         components: {InfoCards, NavBar},
         data() {
             return {
-                pedExpedicao: [],
                 pedSeparacao: [],
+                pedExpedicao: [],
+                timePedidos: []
             }
         },
         mounted() {
-
-            // this.getPedidosEmExpedicao();
-            // this.getPedidosEmSeparacao();
             this.getPedidos();
         },
         methods: {
             getPedidos() {
-
                 axios.get('/separacao-expedicao')
                     .then(({data}) => {
-                        this.pedExpedicao = data.expedicao;
-                        this.pedSeparacao = data.separacao;
-                        setTimeout(() => {
-                            this.getPedidos();
-                        }, 5000);
+                        this.pedExpedicao = data['expedicao'];
+                        const pedidos = data['separacao'].filter(pedido => this.pedSeparacao.every(p => pedido.numped !== p.numped));
+                        this.pedSeparacao.push(...pedidos.map(pedido => {
+                            pedido.time = moment();
+                            return pedido;
+                        }));
                     }).catch(err => {
                     console.log(err)
                 });
-            },
-            getPedidosEmExpedicao() {
-
-                axios.get('/expedicao')
-                    .then(({data}) => {
-                        this.pedExpedicao = data;
-                    }).catch(err => {
-                    console.log(err)
-                });
-
                 setTimeout(() => {
-                    this.getPedidosEmExpedicao();
+                    this.getPedidos();
                 }, 5000);
-            },
-            getPedidosEmSeparacao() {
-                axios.get('/separacao')
-                    .then(res => {
-                        this.pedSeparacao = res.data;
-                    }).catch(err => {
-                    console.log(err)
-                })
             }
 
         },
+        filters: {
+            time(startTime) {
+                let duration = moment.duration(moment(new Date()).diff(startTime));
+                return parseFloat(duration.asMinutes()).toFixed(0);
+            }
+        }
     }
 </script>
 <style scoped>

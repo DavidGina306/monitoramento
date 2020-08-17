@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 
@@ -32,7 +31,6 @@ class FakeController extends Controller
             unset($disponiveis[mt_rand(0, count($disponiveis) - 1)]);
         }
         return  array_values($disponiveis);
-
     }
 
     private function separacao()
