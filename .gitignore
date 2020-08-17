@@ -1,6 +1,7 @@
 /node_modules
 /.idea
-/public
+/public/css
+/public/js
 /storage
 /vendor
 .env
