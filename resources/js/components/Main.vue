@@ -39,6 +39,12 @@
                 </div>
             </b-row>
         </b-container>
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+            <div class="container text-right">
+                <small>&copy; 2020 CAA - Comércio Amazonense de Alumínio </small>
+                <img height="40px" src="/images/logo01.png">
+            </div>
+        </footer>
     </div>
 </template>
 <script>

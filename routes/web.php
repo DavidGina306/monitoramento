@@ -27,4 +27,5 @@ Route::get('/loja/{loja}', 'MonitaramentoController@index');
 Route::get('/separacao/loja/{loja}', 'MonitaramentoController@emExpedicao')->name('get.expedicao');
 Route::get('/expedicao/loja/{loja}', 'MonitaramentoController@emSeparacao')->name('get.separacao');
 
+Route::get('/pedidos/loja/{loja}', 'MonitaramentoController@retornaPedidos')->name('get.pedidos');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\RetornaExpedicaoService;
+use App\Services\RetornaPedidosService;
 use App\Services\RetornaSeparacaoService;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,12 @@ class MonitaramentoController extends Controller
     public function emSeparacao(Request $request)
     {
         $result = RetornaSeparacaoService::emSeparacao($request);
+        return response()->json($result, $result['status'] ? 200: 500);
+    }
+
+    public function retornaPedidos(Request $request)
+    {
+        $result = RetornaPedidosService::retornaPedidos($request);
         return response()->json($result, $result['status'] ? 200: 500);
     }
 
