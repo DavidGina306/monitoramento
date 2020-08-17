@@ -1,7 +1,7 @@
 /node_modules
 /public/hot
-/public/js
-/public/css
+/.idea
+/public
 /storage
 /vendor
 .env
