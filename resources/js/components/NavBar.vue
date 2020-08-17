@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid bg-light border border-left-0 border-right-0 border-top-0 border-bottom">
-        <b-navbar toggleable="lg" class="container"
+        <b-navbar toggleable="lg" class="container vh-10"
                   type="light"
                   variant="light">
             <b-navbar-brand href="#"><img height="50px" src="/images/logo01.png"></b-navbar-brand>
@@ -26,3 +26,10 @@
 <script>
     export default {}
 </script>
+<style scoped>
+
+    .vh-10 {
+        height: 10vh;
+    }
+
+</style>
