@@ -1,16 +1,16 @@
 <template>
     <div>
-        <nav-bar/>
         <b-container class="mt-4 bg-light border pt-1 pb-1" fluid="">
             <b-row>
                 <div id='card_sep' class="col-sm-6 mt-negative col-12 mb-5 mb-md-0">
                     <div class="bg-info rounded  p-2 text-white text-center font-weight-bold">
                         SEPARANDO ({{pedSeparacao.length}})
                     </div>
-                    <div  class="table-responsive  mt-1 vh-65 overflow-hidden">
+                    <div  class="table-responsive  mt-0 vh-80 overflow-hidden table-sm">
                         <table v-if="pedSeparacao.length > 0" class="table    overflow-auto">
                             <thead>
                             <tr class="text-black-50">
+                                <th class="border-0">FIL</th>
                                 <th class="border-0"># PEDIDO</th>
                                 <th class="border-0"><i class="fa fa-user"/> CLIENTE</th>
                                 <th class="border-0" style="width: 120px"><i class="far fa-clock"/>  TEMPO</th>
@@ -18,10 +18,11 @@
                             </thead>
                             <tbody>
                             <tr v-for="(item, index) in  pedSeparacao.slice(0,8)" :key="index">
-                                <td> {{item.numped}}</td>
-                                <td>{{item.cliente | nomeCliente}}</td>
+                                <td><b>{{item.codfilial}}</b></td>
+                                <td><b> {{item.numped}}</b></td>
+                                <td><b>{{item.cliente | nomeCliente}}</b></td>
                                 <td class="text-center">
-                                    <span :class="item.cliente | classItem"><i class="far fa-clock"/> {{item.cliente | time}} min</span>
+                                    <span style="font-size: 15px !important;" :class="item.tempo | classItem"><i class="far fa-clock"/><b> {{item.tempo}} min</b></span>
                                 </td>
                             </tr>
                             </tbody>
@@ -33,13 +34,13 @@
                     <div class="bg-success rounded p-2 text-white text-center font-weight-bold">
                         <i class="fas fa-people-carry"/> DISPONÍVEL NA EXPEDIÇÃO ({{pedExpedicao.length}})
                     </div>
-                    <div  class="overflow-hidden vh-65">
+                    <div  class="overflow-hidden vh-80">
                         <info-cards v-if="pedExpedicao.length > 0" v-for="(item,idx) in pedExpedicao.slice(0,4)" :key="idx" :item="item"/>
                     </div>
                 </div>
             </b-row>
         </b-container>
-        <footer id="sticky-footer" class="vh-10 text-center container pt-2 text-black-50">
+        <footer id="sticky-footer" style="height: 40%;" class="vh-5 text-center container pt-0 text-black-50">
             <small>&copy; 2020 CAA - Comércio Amazonense de Alumínio </small>
             <img height="40px" src="/images/logo01.png">
         </footer>
@@ -77,6 +78,7 @@
                 .then(({data}) => {
                     this.pedExpedicao = data.data['expedicao'];
                     this.pedSeparacao =  data.data['separacao'];
+                    console.log(this.pedSeparacao);
                 }).catch(err => {
 
                 });
@@ -88,10 +90,8 @@
 
         },
         filters: {
-            classItem(nome){
-                let time = nome.split(':');
-                time = time.pop().trim();
-                return parseInt(time) && +time >= 10 ? 'badge badge-danger' : 'badge badge-info';
+            classItem(tempo){
+                return parseInt(tempo) && + tempo >= 10 ? 'badge badge-danger' : 'badge badge-info';
             },
             nomeCliente(nome){
                 let novoNome = nome.split('-');
@@ -106,8 +106,8 @@
     }
 </script>
 <style scoped>
-    .vh-65 {
-        height: 65vh;
+    .vh-80 {
+        height: 85vh;
     }
 
     .vh-10 {

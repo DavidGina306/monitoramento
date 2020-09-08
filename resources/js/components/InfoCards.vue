@@ -2,16 +2,14 @@
     <div class="card-box p-1 bg-info mt-1 rounded">
         <div class="inner">
             <h5> {{item.cliente | nomeCliente}} </h5>
-            <p> {{item.numped}}</p>
+            <p> <b>{{item.numped}}</b> <span style="font-size: 16px !important;" :class="item.cliente | classItem">
+                <i class="far fa-clock"/> {{ item.cliente | time}} min
+            </span></p>
         </div>
         <div class="icon">
             <i class="fas fa-people-carry"/>
         </div>
-        <div  class="card-box-footer  d-inline p-1 rounded">
-            <span :class="item.cliente | classItem">
-                <i class="far fa-clock"/> {{ item.cliente | time}} min
-            </span>
-        </div>
+
     </div>
 </template>
 <script>
