@@ -34,8 +34,8 @@
                     <div class="bg-success rounded p-2 text-white text-center font-weight-bold">
                         <i class="fas fa-people-carry"/> DISPONÍVEL ({{pedExpedicao.length}})
                     </div>
-                    <div  v-if="pedExpedicao.length > 0" class="overflow-hidden vh-80">
-                        <info-cards  v-for="(item,idx) in pedExpedicao.slice(0,4)" :key="idx" :item="item"/>
+                    <div  class="overflow-hidden vh-80">
+                        <info-cards v-if="pedExpedicao.length > 0" v-for="(item,idx) in pedExpedicao.slice(0,4)" :key="idx" :item="item"/>
                     </div>
                 </div>
             </b-row>
