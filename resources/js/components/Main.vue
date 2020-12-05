@@ -18,7 +18,7 @@
                             </thead>
                             <tbody>
                             <tr v-for="(item, index) in  pedSeparacao.slice(0,8)" :key="index">
-                                <td><b>{{item.codfilial}}</b></td>
+                                <td width="7%"><b>{{item.codfilial}}</b></td>
                                 <td><b> {{item.numped}}</b></td>
                                 <td><b>{{item.cliente | nomeCliente}}</b></td>
                                 <td class="text-center">
@@ -32,7 +32,7 @@
                 </div>
                 <div id='card_disp' class="col-12 mt-negative col-sm-6">
                     <div class="bg-success rounded p-2 text-white text-center font-weight-bold">
-                        <i class="fas fa-people-carry"/> DISPONÍVEL NA EXPEDIÇÃO ({{pedExpedicao.length}})
+                        <i class="fas fa-people-carry"/> DISPONÍVEL ({{pedExpedicao.length}})
                     </div>
                     <div  class="overflow-hidden vh-80">
                         <info-cards v-if="pedExpedicao.length > 0" v-for="(item,idx) in pedExpedicao.slice(0,4)" :key="idx" :item="item"/>
